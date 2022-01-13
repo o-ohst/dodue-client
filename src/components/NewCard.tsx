@@ -6,7 +6,8 @@ interface Props {
 }
 
 function NewCard(props: Props) {
-
+    
+    // eslint-disable-next-line
     const [selectedColor, setSelectedColor] = useState(-1);
     const closeModal = () => {
         props.setIsNewCardOpen(false);

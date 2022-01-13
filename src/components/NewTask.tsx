@@ -1,4 +1,3 @@
-import colors from "../common/colors";
 import React, { useState } from 'react';
 
 interface Props {
@@ -8,11 +7,9 @@ interface Props {
 
 function NewTask(props: Props) {
 
-    const [selectedColor, setSelectedColor] = useState(-1);
     const closeModal = () => {
         props.setIsNewTaskOpen(false);
     }
-    const handleColorChange = (e: any) => { setSelectedColor(e.target.value); }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
     }

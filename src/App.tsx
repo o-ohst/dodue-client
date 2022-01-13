@@ -13,7 +13,6 @@ function App() {
   const [isNewCardOpen, setIsNewCardOpen] = useState(false);
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const openNewCard = () => { setIsNewCardOpen(true) };
-  const openNewTask = () => { setIsNewTaskOpen(true) };
 
 
   return (
