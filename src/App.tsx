@@ -6,7 +6,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
 
 // const categories = [{ categoryName: 'CS1101S', categoryId: 1, categoryColor: 0 },
 // { categoryName: 'Orientation', categoryId: 2, categoryColor: 1 },
@@ -27,7 +27,8 @@ function App() {
   const [isNewCardOpen, setIsNewCardOpen] = useState(false);
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const [isLogInOpen, setIsLogInOpen] = useState(false);
-  
+  const [cookies, setCookies] = useCookies();
+
   // eslint-disable-next-line
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -46,8 +47,8 @@ function App() {
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-        user_id: Cookies.get("userId") as string,
-        token: Cookies.get("token") as string,
+        user_id: cookies.get("userId") as string,
+        token: cookies.get("token") as string,
       }
     }).then(res => {
       if (res.data.error === undefined && res.status === 200) {
@@ -64,8 +65,8 @@ function App() {
   return (
     <div className="App flex flex-col h-screen">
 
-      <Toaster/>
-      
+      <Toaster />
+
       {isLogInOpen && (
         <LogIn callback={onLogIn} setIsLogInOpen={setIsLogInOpen}></LogIn>
       )}
@@ -92,12 +93,12 @@ function App() {
             </svg>
           </button>
         )}
-        
+
       </header>
 
       {loggedIn || (<div className="flex justify-center w-full h-full bg-background">
         <SignUp callback={onSignUp}></SignUp>
-        </div>
+      </div>
       )}
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll'>
