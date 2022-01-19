@@ -27,6 +27,8 @@ function App() {
   const [isNewCardOpen, setIsNewCardOpen] = useState(false);
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const [isLogInOpen, setIsLogInOpen] = useState(false);
+
+  // eslint-disable-next-line
   const [cookies, setCookies] = useCookies();
 
   // eslint-disable-next-line
