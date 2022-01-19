@@ -46,10 +46,12 @@ function App() {
     setLoggedIn(true);
     setIsLogInOpen(false);
     toast.success('Log in success!');
+    console.log(cookies.get("user_id"));
+    console.log(cookies.get("token"));
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-        user_id: cookies.get("userId") as string,
+        user_id: cookies.get("user_id") as string,
         token: cookies.get("token") as string,
       }
     }).then(res => {
@@ -59,7 +61,7 @@ function App() {
         console.log(res.data.error);
       }
     }).catch(err => {
-      console.log(err.toJSON());
+      console.log(err);
     })
   }
 
