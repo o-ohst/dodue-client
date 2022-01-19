@@ -18,7 +18,7 @@ function LogIn(props: Props) {
         e.preventDefault();
 
         axios.post(process.env.REACT_APP_API_URL + 'login', {}, {
-            // withCredentials: true,
+            withCredentials: true,
             headers: {
                 api_key: process.env.REACT_APP_API_KEY!,
                 username: e.currentTarget.username.value,
