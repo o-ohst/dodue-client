@@ -4,7 +4,6 @@ import NewCard from "./components/NewCard";
 import NewTask from "./components/NewTask";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import { useCookies } from "react-cookie";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 
@@ -27,11 +26,12 @@ function App() {
   const [isNewCardOpen, setIsNewCardOpen] = useState(false);
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const [isLogInOpen, setIsLogInOpen] = useState(false);
+  
+  // eslint-disable-next-line
   const [categories, setCategories] = useState<Category[]>([]);
 
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
-  const signUpToast = () => { toast('Success!') }
 
   const onSignUp = () => {
     openLogIn();
