@@ -33,7 +33,7 @@ function LogIn(props: Props) {
                 props.callback();
             }
             }).catch(err => {
-                console.log(err.toJSON());
+                console.log(err);
             })
     }
 

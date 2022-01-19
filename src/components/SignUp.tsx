@@ -55,7 +55,7 @@ function SignUp(props: Props) {
                 }
             }
         }).catch(err => {
-            console.log(err.toJSON());
+            console.log(err);
         })
     }
 
