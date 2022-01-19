@@ -6,7 +6,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 
 // const categories = [{ categoryName: 'CS1101S', categoryId: 1, categoryColor: 0 },
 // { categoryName: 'Orientation', categoryId: 2, categoryColor: 1 },
@@ -29,10 +29,10 @@ function App() {
   const [isLogInOpen, setIsLogInOpen] = useState(false);
 
   // eslint-disable-next-line
-  const [cookies, setCookies] = useCookies();
 
   // eslint-disable-next-line
   const [categories, setCategories] = useState<Category[]>([]);
+  const cookies = new Cookies();
 
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
@@ -46,13 +46,13 @@ function App() {
     setLoggedIn(true);
     setIsLogInOpen(false);
     toast.success('Log in success!');
-    console.log(cookies.user_id);
-    console.log(cookies.token);
+    console.log(cookies.get('user_id'));
+    console.log(cookies.get('token'));
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-        user_id: cookies.user_id as string,
-        token: cookies.token as string,
+        user_id: cookies.get('user_id') as string,
+        token: cookies.get('token') as string,
       }
     }).then(res => {
       if (res.data.error === undefined && res.status === 200) {
