@@ -6,6 +6,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 // const categories = [{ categoryName: 'CS1101S', categoryId: 1, categoryColor: 0 },
 // { categoryName: 'Orientation', categoryId: 2, categoryColor: 1 },
@@ -45,8 +46,8 @@ function App() {
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-        // user_id: userId as string,
-        // token: token as string,
+        user_id: Cookies.get("userId") as string,
+        token: Cookies.get("token") as string,
       }
     }).then(res => {
       if (res.data.error === undefined && res.status === 200) {
