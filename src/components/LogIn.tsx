@@ -27,7 +27,6 @@ function LogIn(props: Props) {
         }).then(res => {
             if (res.data.error === undefined && res.status === 200) {
                 console.log('logged in');
-                console.log(res.headers['set-cookie'])
                 // props.setToken(res.headers['token']);
                 // props.setUserId(res.headers['user_id']);
                 props.callback();

@@ -29,7 +29,9 @@ function App() {
   const [isLogInOpen, setIsLogInOpen] = useState(false);
 
   // eslint-disable-next-line
-  const [cookies, setCookies] = useCookies();
+  const [user_id, setUser_id] = useCookies(['user_id']);
+  // eslint-disable-next-line
+  const [token, setToken] = useCookies(['token']);
 
   // eslint-disable-next-line
   const [categories, setCategories] = useState<Category[]>([]);
@@ -46,13 +48,13 @@ function App() {
     setLoggedIn(true);
     setIsLogInOpen(false);
     toast.success('Log in success!');
-    console.log(cookies.get("user_id"));
-    console.log(cookies.get("token"));
+    console.log(user_id);
+    console.log(token);
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-        user_id: cookies.get("user_id") as string,
-        token: cookies.get("token") as string,
+        user_id: user_id as string,
+        token: token as string,
       }
     }).then(res => {
       if (res.data.error === undefined && res.status === 200) {
