@@ -6,7 +6,7 @@ interface Props {
 }
 
 function NewCard(props: Props) {
-    
+
     // eslint-disable-next-line
     const [selectedColor, setSelectedColor] = useState(-1);
     const closeModal = () => {
@@ -14,7 +14,7 @@ function NewCard(props: Props) {
     }
     const handleColorChange = (e: any) => { setSelectedColor(e.target.value); }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        
+
     }
 
     return (
