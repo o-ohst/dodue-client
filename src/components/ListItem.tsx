@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { stringify } from 'querystring';
 
 interface Task {
     taskInfo: string;
@@ -11,12 +12,9 @@ function ListItem(props:Task) {
     const [inputDisabled, setInputDisabled] = useState(false);
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
-        console.log(isChecked);
         setInputDisabled(true);
-        console.log(!isChecked);
-        const data = { task_id: props.taskId, done: !isChecked }
+        const data = { task_id: props.taskId, done: (!isChecked).toString() }
         setIsChecked(!isChecked);
-        console.log(isChecked);
         audio.play();
     
         axios.put(process.env.REACT_APP_API_URL + 'tasks/done', data, {
