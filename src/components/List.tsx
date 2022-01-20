@@ -14,7 +14,7 @@ function List(props:Tasks) {
     return (
         <div>
             {props.tasks.map(task => (
-                <ListItem taskInfo={task.taskInfo}></ListItem>
+                <ListItem taskInfo={task.taskInfo} taskId={task.taskId}></ListItem>
             ))}
         </div>
         

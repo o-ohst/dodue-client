@@ -102,11 +102,13 @@ function App() {
 
   const onNewTask = () => {
     setIsNewTaskOpen(false);
+    toast.success('New task created.');
     loadData();
   }
   
   const onNewCard = () => {
     setIsNewCardOpen(false);
+    toast.success('New category created.');
     loadData();
   }
 
