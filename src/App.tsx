@@ -100,7 +100,15 @@ function App() {
     localStorage.setItem('loggedIn', 'true')
   }
 
+  const onNewTask = () => {
+    setIsNewTaskOpen(false);
+    loadData();
+  }
   
+  const onNewCard = () => {
+    setIsNewCardOpen(false);
+    loadData();
+  }
 
   return (
     <div className="App flex flex-col h-screen">
