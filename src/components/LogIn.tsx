@@ -9,8 +9,6 @@ interface Props {
 }
 
 function LogIn(props: Props) {
-
-    // eslint-disable-next-line
     const [usernameMessage, setUsernameMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
 
@@ -19,6 +17,8 @@ function LogIn(props: Props) {
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setUsernameMessage('');
+        setPasswordMessage('');
 
         const u = e.currentTarget.username.value;
         const p = e.currentTarget.password.value;
@@ -43,8 +43,6 @@ function LogIn(props: Props) {
         }).then(res => {
             if (res.data.error === undefined && res.status === 200) {
                 console.log('logged in');
-                // props.setToken(res.headers['token']);
-                // props.setUserId(res.headers['user_id']);
                 props.callback();
             } else {
                 setPasswordMessage('Invalid credentials.')

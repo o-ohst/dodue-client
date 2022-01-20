@@ -40,6 +40,7 @@ function App() {
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
 
+  console.log(localStorage.getItem('loggedIn'));
   if (localStorage.getItem('loggedIn') === 'true') {
     setLoggedIn(true);
   }
@@ -92,7 +93,7 @@ function App() {
     setIsLogInOpen(false);
     toast.success('Log in success!');
     loadData();
-    localStorage.setItem('loggedin', 'true')
+    localStorage.setItem('loggedIn', 'true')
   }
 
   return (
