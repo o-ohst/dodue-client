@@ -21,6 +21,7 @@ type Category = {
 interface Task {
   taskInfo: string,
   taskId: number,
+  categoryId: number,
 }
 
 function App() {
@@ -77,7 +78,7 @@ function App() {
       if (res.data.error === undefined && res.status === 200) {
         console.log('get tasks success');
         const data: Task[] = [];
-        res.data.map((t: any) => data.push({ taskId: t.task_id, taskInfo: t.name }))
+        res.data.map((t: any) => data.push({ taskId: t.task_id, taskInfo: t.name, categoryId: t.category_id }))
         setTasks(data);
       } else {
         console.log(res.data.error);
@@ -130,7 +131,7 @@ function App() {
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll'>
         {categories.map(category => (
-          <Card setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks}></Card>
+          <Card setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks.filter( t => t.categoryId === category.categoryId )}></Card>
         ))}
       </div>)}
     </div>
