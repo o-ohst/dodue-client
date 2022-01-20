@@ -11,7 +11,6 @@ function ListItem(props:Task) {
     const [inputDisabled, setInputDisabled] = useState(false);
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
-        setIsChecked(!isChecked);
         setInputDisabled(true);
         audio.play();
     
@@ -20,9 +19,10 @@ function ListItem(props:Task) {
             headers: {
                 api_key: process.env.REACT_APP_API_KEY!,
                 task_id: props.taskId.toString(),
-                done: isChecked.toString(),
+                done: (!isChecked).toString(),
             }
         }).then(res => {
+            setIsChecked(!isChecked);
             if (res.headers.error === undefined && res.status === 200) {
                 console.log("done task success")
             }
