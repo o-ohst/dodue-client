@@ -11,15 +11,16 @@ function ListItem(props:Task) {
     const [inputDisabled, setInputDisabled] = useState(false);
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
-        setInputDisabled(true);
-        const data = { task_id: props.taskId, done: (!isChecked).toString() }
         setIsChecked(!isChecked);
+        setInputDisabled(true);
         audio.play();
     
-        axios.put(process.env.REACT_APP_API_URL + 'tasks/done', data, {
+        axios.put(process.env.REACT_APP_API_URL + 'tasks/done', {}, {
             withCredentials: true,
             headers: {
                 api_key: process.env.REACT_APP_API_KEY!,
+                task_id: props.taskId.toString(),
+                done: isChecked.toString(),
             }
         }).then(res => {
             if (res.headers.error === undefined && res.status === 200) {
