@@ -40,13 +40,12 @@ function App() {
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
 
-
   useEffect(() => {
     console.log(localStorage.getItem('loggedIn'));
     if (localStorage.getItem('loggedIn') === 'true') {
       setLoggedIn(true);
     }
-  });
+  }, []);
 
 
   const loadData = () => {
