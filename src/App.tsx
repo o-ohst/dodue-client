@@ -44,6 +44,7 @@ function App() {
     console.log(localStorage.getItem('loggedIn'));
     if (localStorage.getItem('loggedIn') === 'true') {
       setLoggedIn(true);
+      loadData();
     }
   }, []);
 
