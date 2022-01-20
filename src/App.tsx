@@ -119,10 +119,10 @@ function App() {
         <LogIn callback={onLogIn} setIsLogInOpen={setIsLogInOpen}></LogIn>
       )}
       {isNewCardOpen && (
-        <NewCard setIsNewCardOpen={setIsNewCardOpen}></NewCard>
+        <NewCard callback={onNewCard} setIsNewCardOpen={setIsNewCardOpen}></NewCard>
       )}
       {isNewTaskOpen && (
-        <NewTask categoryId={thisCategory} setIsNewTaskOpen={setIsNewTaskOpen}></NewTask>
+        <NewTask callback={onNewTask} categoryId={thisCategory} setIsNewTaskOpen={setIsNewTaskOpen}></NewTask>
       )}
 
       <header className="App-header bg-primary h-24 md:h-28 drop-shadow-md px-10 md:px-14 flex">

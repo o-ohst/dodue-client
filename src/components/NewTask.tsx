@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 interface Props {
-    setIsNewTaskOpen: Function;
+    setIsNewTaskOpen: Function,
     categoryId: number,
+    callback: Function,
 }
 
 function NewTask(props: Props) {
@@ -22,14 +23,21 @@ function NewTask(props: Props) {
             return
         }
 
-        const data = { name: e.currentTarget.newname.value, category_id: props.categoryId}
+        const data = { name: e.currentTarget.newname.value, category_id: props.categoryId }
 
         axios.post(process.env.REACT_APP_API_URL + 'tasks/new', data, {
             withCredentials: true,
             headers: {
                 api_key: process.env.REACT_APP_API_KEY!,
             }
-        })
+        }).then(res => {
+            if (res.headers.error === undefined && res.status === 200) {
+                props.callback();
+            }
+        }).catch(err => { 
+             console.log(err)
+        }
+         )
     }
 
     return (

@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 interface Props {
-    setIsNewCardOpen: Function;
+    setIsNewCardOpen: Function,
+    callback: Function,
 }
 
 function NewCard(props: Props) {
@@ -36,7 +37,14 @@ function NewCard(props: Props) {
             headers: {
                 api_key: process.env.REACT_APP_API_KEY!,
             }
-        })
+        }).then(res => {
+            if (res.headers.error === undefined && res.status === 200) {
+                props.callback();
+            }
+        }).catch(err => {
+            console.log(err)
+        }
+        )
     }
 
     return (
