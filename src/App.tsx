@@ -18,6 +18,11 @@ type Category = {
   categoryColor: number,
 }
 
+interface Task {
+  taskInfo: string,
+  taskId: number,
+}
+
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,6 +36,7 @@ function App() {
 
   // eslint-disable-next-line
   const [categories, setCategories] = useState<Category[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
@@ -48,18 +54,38 @@ function App() {
       withCredentials : true,
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-        // user_id: cookies.get('user_id') as string,
-        // token: cookies.get('token') as string,
       }
     }).then(res => {
       if (res.data.error === undefined && res.status === 200) {
         console.log('get categories success');
+        const data : Category[] = [];
+        res.data.map( (c: any) => data.push({categoryId : c.category_id, categoryName : c.name, categoryColor : c.color}))
+        setCategories(data);
       } else {
         console.log(res.data.error);
       }
     }).catch(err => {
       console.log(err);
     })
+
+    axios.get(process.env.REACT_APP_API_URL + 'tasks', {
+      withCredentials: true,
+      headers: {
+        api_key: process.env.REACT_APP_API_KEY!,
+      }
+    }).then(res => {
+      if (res.data.error === undefined && res.status === 200) {
+        console.log('get tasks success');
+        const data: Task[] = [];
+        res.data.map((t: any) => data.push({ taskId: t.task_id, taskInfo: t.name }))
+        setTasks(data);
+      } else {
+        console.log(res.data.error);
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+  
   }
 
 
@@ -104,7 +130,7 @@ function App() {
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll'>
         {categories.map(category => (
-          <Card setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor}></Card>
+          <Card setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks}></Card>
         ))}
       </div>)}
     </div>

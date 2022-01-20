@@ -1,16 +1,21 @@
 import Label from './Label';
 import List from './List';
 
+interface Task {
+    taskInfo: string,
+    taskId: number,
+}
+
 interface Category {
     categoryName: string,
     categoryId: number,
     categoryColor: number,
-    setIsNewTaskOpen: Function
+    setIsNewTaskOpen: Function,
+    tasks: Task[],
 }
 
 function Card(props:Category) {
 
-    const tasks = [{ taskInfo: 'Hello task 1', taskId: 1 }, { taskInfo: 'Hello task 2', taskId: 2 }];
     const openNewTask = () => {props.setIsNewTaskOpen(true)}
 
     return(
@@ -23,7 +28,7 @@ function Card(props:Category) {
                     </svg>
                 </button>
             </div>
-            <List tasks={tasks}/>
+            <List tasks={props.tasks}/>
         </div>
     )
 }
