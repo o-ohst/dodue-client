@@ -11,13 +11,12 @@ interface Props {
 function LogIn(props: Props) {
     const [usernameMessage, setUsernameMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
-    const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const closeModal = () => {
         props.setIsLogInOpen(false);
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        setSubmitDisabled(true);
+        
         e.preventDefault();
         setUsernameMessage('');
         setPasswordMessage('');
@@ -48,7 +47,6 @@ function LogIn(props: Props) {
                 props.callback();
             } else {
                 setPasswordMessage('Invalid credentials.');
-                setSubmitDisabled(false);
             }
             }).catch(err => {
                 console.log(err);
@@ -83,7 +81,7 @@ function LogIn(props: Props) {
                             
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" disabled={submitDisabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
+                            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
                                 Log In
                             </button>
                         </div>

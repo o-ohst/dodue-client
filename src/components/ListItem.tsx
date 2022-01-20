@@ -8,10 +8,8 @@ interface Task {
 
 function ListItem(props:Task) {
     const [isChecked, setIsChecked] = useState(false);
-    const [inputDisabled, setInputDisabled] = useState(false);
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
-        setInputDisabled(true);
         audio.play();
     
         axios.put(process.env.REACT_APP_API_URL + 'tasks/done', {}, {
@@ -26,7 +24,6 @@ function ListItem(props:Task) {
             if (res.headers.error === undefined && res.status === 200) {
                 console.log("done task success")
             }
-            setInputDisabled(false);
         }).catch(err => {
             console.log(err)
         }
@@ -39,7 +36,7 @@ function ListItem(props:Task) {
     return (
         
         <div className="mt-3 flex">
-            <input disabled={inputDisabled} className="w-6 h-6 align-middle text-primary focus:ring-gray-200 focus:ring-opacity-0 border border-gray-300 rounded" id="1" type='checkbox' checked={isChecked} onChange={handleChange} />
+            <input className="w-6 h-6 align-middle text-primary focus:ring-gray-200 focus:ring-opacity-0 border border-gray-300 rounded" id="1" type='checkbox' checked={isChecked} onChange={handleChange} />
             <div className={'mx-2 text-lg align-middle font-notosans select-none cursor-pointer w-fit' + (isChecked ? ' line-through text-gray-400' : ' text-gray-800')} onClick={handleChange} >{props.taskInfo}</div>
         </div>
         
