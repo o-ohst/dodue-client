@@ -12,7 +12,7 @@ function ListItem(props:Task) {
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
         setInputDisabled(true);
-        const data = { task_id: props.taskId, done: isChecked }
+        const data = { task_id: props.taskId, done: !isChecked }
         setIsChecked(!isChecked);
         audio.play();
     
