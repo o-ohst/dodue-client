@@ -47,12 +47,13 @@ function LogIn(props: Props) {
                 console.log('logged in');
                 props.callback();
             } else {
-                setPasswordMessage('Invalid credentials.')
+                setPasswordMessage('Invalid credentials.');
+                setSubmitDisabled(false);
             }
             }).catch(err => {
                 console.log(err);
             })
-        setSubmitDisabled(false);
+        
     }
 
     return (

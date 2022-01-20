@@ -26,12 +26,13 @@ function ListItem(props:Task) {
             if (res.headers.error === undefined && res.status === 200) {
                 console.log("done task success")
             }
+            setInputDisabled(false);
         }).catch(err => {
             console.log(err)
         }
         )
 
-        setInputDisabled(false);
+        
         
     };
 

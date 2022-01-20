@@ -55,12 +55,11 @@ function SignUp(props: Props) {
                         console.log(res.data.error);
                         break;
                 }
+                setSubmitDisabled(false);
             }
         }).catch(err => {
             console.log(err);
         })
-
-        setSubmitDisabled(false);
     }
 
     return (
