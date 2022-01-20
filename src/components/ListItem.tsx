@@ -12,10 +12,10 @@ function ListItem(props:Task) {
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
         setInputDisabled(true);
+        const data = { task_id: props.taskId, done: isChecked }
         setIsChecked(!isChecked);
         audio.play();
-
-        const data = { task_id: props.taskId, done: isChecked}
+    
         axios.put(process.env.REACT_APP_API_URL + 'tasks/done', data, {
             withCredentials: true,
             headers: {
