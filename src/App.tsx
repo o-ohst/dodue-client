@@ -1,5 +1,5 @@
 import Card from "./components/Card";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewCard from "./components/NewCard";
 import NewTask from "./components/NewTask";
 import LogIn from "./components/LogIn";
@@ -40,10 +40,14 @@ function App() {
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
 
-  console.log(localStorage.getItem('loggedIn'));
-  if (localStorage.getItem('loggedIn') === 'true') {
-    setLoggedIn(true);
-  }
+
+  useEffect(() => {
+    console.log(localStorage.getItem('loggedIn'));
+    if (localStorage.getItem('loggedIn') === 'true') {
+      setLoggedIn(true);
+    }
+  });
+
 
   const loadData = () => {
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
@@ -95,6 +99,8 @@ function App() {
     loadData();
     localStorage.setItem('loggedIn', 'true')
   }
+
+  
 
   return (
     <div className="App flex flex-col h-screen">
