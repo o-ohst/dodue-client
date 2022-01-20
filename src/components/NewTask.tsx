@@ -1,17 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 interface Props {
     setIsNewTaskOpen: Function;
-
+    categoryId: number,
 }
 
 function NewTask(props: Props) {
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const closeModal = () => {
         props.setIsNewTaskOpen(false);
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        setErrorMessage('');
+        e.preventDefault();
 
+        if (e.currentTarget.newname.value === '') {
+            setErrorMessage("Please enter a name.")
+            return
+        }
+
+        const data = { name: e.currentTarget.newname.value, category_id: props.categoryId}
+
+        axios.post(process.env.REACT_APP_API_URL + 'tasks/new', data, {
+            withCredentials: true,
+            headers: {
+                api_key: process.env.REACT_APP_API_KEY!,
+            }
+        })
     }
 
     return (
@@ -21,7 +39,7 @@ function NewTask(props: Props) {
                     <form action="#" method="POST" onSubmit={handleSubmit}>
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <div className="flex justify-between">
-                                <h1 className="pb-3 text-lg font-notosans">New Task</h1>
+                                <h1 className="pb-3 text-xl font-notosans">New Task</h1>
                                 <button onClick={closeModal}>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mb-2" fill="none" viewBox="0 0 24 24" stroke="gray">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -29,12 +47,13 @@ function NewTask(props: Props) {
                                 </button>
                             </div>
                             <div className="col-span-6 sm:col-span-3">
-                                <label className="block text-sm font-notosans text-gray-700">Task</label>
-                                <input type="text" id="name" autoComplete="off" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                <label className="block text-md font-notosans text-gray-700">Task</label>
+                                <input type="text" name="newname" id="name" autoComplete="off" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
+                                <label className="block text-sm font-notosans pt-2 text-red-400">{errorMessage}</label>
                             </div>
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
+                            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
                                 Save
                             </button>
                         </div>

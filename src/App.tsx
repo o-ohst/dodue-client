@@ -26,41 +26,34 @@ interface Task {
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  // const [userId, setUserId] = useCookies(['user_id']);
-  // const [token , setToken] = useCookies(['token']);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isNewCardOpen, setIsNewCardOpen] = useState(false);
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const [isLogInOpen, setIsLogInOpen] = useState(false);
+  const [thisCategory, setThisCategory] = useState(-1);
 
   // eslint-disable-next-line
-
-  // eslint-disable-next-line
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [categories, setCategories] = useState<Category[]>([{ "categoryId": 5, "categoryName": "CS2040S", "categoryColor": 0 }, { "categoryId": 6, "categoryName": "CVWO", "categoryColor": 1 }, { "categoryId": 7, "categoryName": "Orientation", "categoryColor": 2 }, { "categoryId": 8, "categoryName": "UTW1001C", "categoryColor": 3 }, { "categoryId": 9, "categoryName": "General", "categoryColor": 4 }]);
+  const [tasks, setTasks] = useState<Task[]>([{ "taskId": 6, "taskInfo": "watch lecture", "categoryId": 5 }, { "taskId": 7, "taskInfo": "do problem set", "categoryId": 5 }, { "taskId": 8, "taskInfo": "laundry", "categoryId": 9 }, { "taskId": 9, "taskInfo": "call meeting", "categoryId": 7 }, { "taskId": 10, "taskInfo": "prepare poster", "categoryId": 7 }, { "taskId": 11, "taskInfo": "plan games", "categoryId": 7 }, { "taskId": 12, "taskInfo": "readings", "categoryId": 8 }]);
 
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
 
-  const onSignUp = () => {
-    openLogIn();
-    toast.success('Sign up success!');
+  if (localStorage.getItem('loggedIn') === 'true') {
+    setLoggedIn(true);
   }
 
-  const onLogIn = () => {
-    setLoggedIn(true);
-    setIsLogInOpen(false);
-    toast.success('Log in success!');
+  const loadData = () => {
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
-      withCredentials : true,
+      withCredentials: true,
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
       }
     }).then(res => {
       if (res.data.error === undefined && res.status === 200) {
         console.log('get categories success');
-        const data : Category[] = [];
-        res.data.map( (c: any) => data.push({categoryId : c.category_id, categoryName : c.name, categoryColor : c.color}))
+        const data: Category[] = [];
+        res.data.map((c: any) => data.push({ categoryId: c.category_id, categoryName: c.name, categoryColor: c.color }))
         setCategories(data);
       } else {
         console.log(res.data.error);
@@ -86,9 +79,20 @@ function App() {
     }).catch(err => {
       console.log(err);
     })
-  
   }
 
+  const onSignUp = () => {
+    openLogIn();
+    toast.success('Sign up success!');
+  }
+
+  const onLogIn = () => {
+    setLoggedIn(true);
+    setIsLogInOpen(false);
+    toast.success('Log in success!');
+    loadData();
+    localStorage.setItem('loggedin', 'true')
+  }
 
   return (
     <div className="App flex flex-col h-screen">
@@ -102,7 +106,7 @@ function App() {
         <NewCard setIsNewCardOpen={setIsNewCardOpen}></NewCard>
       )}
       {isNewTaskOpen && (
-        <NewTask setIsNewTaskOpen={setIsNewTaskOpen}></NewTask>
+        <NewTask categoryId={thisCategory} setIsNewTaskOpen={setIsNewTaskOpen}></NewTask>
       )}
 
       <header className="App-header bg-primary h-24 md:h-28 drop-shadow-md px-10 md:px-14 flex">
@@ -126,12 +130,12 @@ function App() {
 
       {loggedIn || (<div className="flex justify-center w-full h-full bg-background">
         <SignUp callback={onSignUp}></SignUp>
-      </div>
+      </div>  
       )}
 
-      {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll'>
+      {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll '>
         {categories.map(category => (
-          <Card setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks.filter( t => t.categoryId === category.categoryId )}></Card>
+          <Card setThisCategory={setThisCategory} setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks.filter(t => t.categoryId === category.categoryId)}></Card>
         ))}
       </div>)}
     </div>

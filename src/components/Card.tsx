@@ -11,12 +11,16 @@ interface Category {
     categoryId: number,
     categoryColor: number,
     setIsNewTaskOpen: Function,
+    setThisCategory: Function,
     tasks: Task[],
 }
 
 function Card(props:Category) {
 
-    const openNewTask = () => {props.setIsNewTaskOpen(true)}
+    const openNewTask = () => {
+        props.setIsNewTaskOpen(true)
+        props.setThisCategory(props.categoryId)
+    }
 
     return(
         <div className='bg-white font-notosans rounded-2xl drop-shadow-md p-5 mr-10 min-w-fit h-fit'>
