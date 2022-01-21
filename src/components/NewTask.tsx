@@ -46,9 +46,9 @@ function NewTask(props: Props) {
                 if (res.status === 200) {
                     props.callback();
                 }
-                setDisabled(false);
             }).catch(err => {
                 console.log(err)
+                setDisabled(false);
             })
             
         }
@@ -72,7 +72,7 @@ function NewTask(props: Props) {
                             </div>
                             <div className="col-span-6 sm:col-span-3">
                                 <label className="block text-md font-notosans text-gray-700">Task</label>
-                                <input type="text" name="newname" id="name" autoComplete="off" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
+                                <input autoFocus type="text" name="newname" id="name" autoComplete="off" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
                                 <label className="block text-sm font-notosans pt-2 text-red-400">{errorMessage}</label>
                             </div>
                         </div>

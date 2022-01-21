@@ -25,15 +25,16 @@ function ListItem(props:Task) {
                     done: (!isChecked).toString(),
                 }
             }).then(res => {
-                setIsChecked(!isChecked);
                 if (res.status === 200) {
                     console.log("done task success")
+                    setIsChecked(!isChecked);
                 }
-                setDisabled(false);
             }).catch(err => {
                 console.log(err)
+                setDisabled(false);
             }
             )
+
         }
         
     };
@@ -41,7 +42,7 @@ function ListItem(props:Task) {
     return (
         
         <div className="mt-3 flex">
-            <input className="w-6 h-6 align-middle text-primary focus:ring-gray-200 focus:ring-opacity-0 border border-gray-300 rounded" id="1" type='checkbox' checked={isChecked} onChange={handleChange} />
+            <input className="w-6 h-6 align-middle text-primary focus:ring-gray-200 cursor-pointer focus:ring-opacity-0 border border-gray-300 rounded" id={props.taskId.toString()} type='checkbox' checked={isChecked} onChange={handleChange} />
             <div className={'mx-2 text-lg align-middle font-notosans select-none cursor-pointer w-fit' + (isChecked ? ' line-through text-gray-400' : ' text-gray-800')} onClick={handleChange} >{props.taskInfo}</div>
         </div>
         

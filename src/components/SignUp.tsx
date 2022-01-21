@@ -58,9 +58,9 @@ function SignUp(props: Props) {
                             break;
                     }
                 }
-                setDisabled(false);
             }).catch(err => {
                 console.log(err);
+                setDisabled(false);
             })
         }
     }
@@ -77,7 +77,7 @@ function SignUp(props: Props) {
                             </div>
                             <div className="col-span-6 sm:col-span-3 mt-3">
                                 <label className="block text-md font-notosans text-gray-700">Username</label>
-                                <input type="text" name='username' id="username" autoComplete="username" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
+                                <input autoFocus type="text" name='username' id="username" autoComplete="username" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
                                 <label className="block text-sm font-notosans pt-2 text-red-400">{usernameMessage}</label>
                             </div>
                             <div className="col-span-6 sm:col-span-3 mt-3">
@@ -88,7 +88,7 @@ function SignUp(props: Props) {
 
                         </div>
                         <div className="px-4 py-3 bg-white text-center sm:px-6">
-                            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
+                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
                                 Sign Up
                             </button>
                         </div>

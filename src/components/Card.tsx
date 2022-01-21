@@ -41,16 +41,16 @@ function Card(props: Category) {
                 if (res.status === 200) {
                     props.callback();
                 }
-                setDisabled(false);
             }).catch(err => {
-                console.log(err)
+                console.log(err);
+                setDisabled(false);
             }
             )
         }
     }
 
     return(
-        <div className='bg-white font-notosans rounded-2xl drop-shadow-md p-5 mr-10 min-w-fit h-fit'>
+        <div id={props.categoryId.toString()} className='bg-white font-notosans rounded-2xl drop-shadow-md p-5 mr-10 min-w-fit h-fit'>
             <div className='flex'>
                 <Label name={props.categoryName} color={props.categoryColor} ></Label>
                 <button className='my-auto ml-auto' onClick={openNewTask}>
