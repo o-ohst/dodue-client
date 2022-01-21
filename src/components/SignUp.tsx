@@ -64,7 +64,7 @@ function SignUp(props: Props) {
 
             <div className="">
                 <div className="overflow-hidden rounded-lg w-96 h-fit mx-auto my-auto">
-                    <form action="#" method="POST" onSubmit={handleSubmit}>
+                    <form  onSubmit={handleSubmit}>
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <div className="flex justify-center">
                                 <h1 className="pb-3 text-xl font-notosans">Sign Up</h1>

@@ -1,5 +1,6 @@
 import Label from './Label';
 import List from './List';
+import axios from 'axios';
 
 interface Task {
     taskInfo: string,
@@ -13,13 +14,31 @@ interface Category {
     setIsNewTaskOpen: Function,
     setThisCategory: Function,
     tasks: Task[],
+    callback: Function,
 }
 
-function Card(props:Category) {
+function Card(props: Category) {
 
     const openNewTask = () => {
         props.setIsNewTaskOpen(true)
         props.setThisCategory(props.categoryId)
+    }
+
+    const deleteCategory = () => {
+        axios.put(process.env.REACT_APP_API_URL + 'categories/delete', {}, {
+            withCredentials: true,
+            headers: {
+                api_key: process.env.REACT_APP_API_KEY!,
+                category_id: props.categoryId.toString(),
+            }
+        }).then(res => {
+            if (res.headers.error === undefined && res.status === 200) {
+                props.callback();
+            }
+        }).catch(err => {
+            console.log(err)
+        }
+        )
     }
 
     return(
@@ -32,6 +51,9 @@ function Card(props:Category) {
                     </svg>
                 </button>
             </div>
+            {(props.tasks.length === 0) && (
+                <button onClick={deleteCategory} className='mt-3 mr-2 text-lg underline text-gray-400'>Delete card</button>
+            )}
             <List tasks={props.tasks}/>
         </div>
     )

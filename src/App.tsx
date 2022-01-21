@@ -7,11 +7,6 @@ import SignUp from "./components/SignUp";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 
-// const categories = [{ categoryName: 'CS1101S', categoryId: 1, categoryColor: 0 },
-// { categoryName: 'Orientation', categoryId: 2, categoryColor: 1 },
-// { categoryName: 'CCA', categoryId: 3, categoryColor: 2 },
-// ];
-
 type Category = {
   categoryName: string,
   categoryId: number,
@@ -34,8 +29,6 @@ function App() {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
-  // const [categories, setCategories] = useState<Category[]>([{ "categoryId": 5, "categoryName": "CS2040S", "categoryColor": 0 }, { "categoryId": 6, "categoryName": "CVWO", "categoryColor": 1 }, { "categoryId": 7, "categoryName": "Orientation", "categoryColor": 2 }, { "categoryId": 8, "categoryName": "UTW1001C", "categoryColor": 3 }, { "categoryId": 9, "categoryName": "General", "categoryColor": 4 }]);
-  // const [tasks, setTasks] = useState<Task[]>([{ "taskId": 6, "taskInfo": "watch lecture", "categoryId": 5 }, { "taskId": 7, "taskInfo": "do problem set", "categoryId": 5 }, { "taskId": 8, "taskInfo": "laundry", "categoryId": 9 }, { "taskId": 9, "taskInfo": "call meeting", "categoryId": 7 }, { "taskId": 10, "taskInfo": "prepare poster", "categoryId": 7 }, { "taskId": 11, "taskInfo": "plan games", "categoryId": 7 }, { "taskId": 12, "taskInfo": "readings", "categoryId": 8 }]);
 
   const openNewCard = () => { setIsNewCardOpen(true) };
   const openLogIn = () => { setIsLogInOpen(true) };
@@ -46,8 +39,14 @@ function App() {
       setLoggedIn(true);
       loadData();
     }
+    // setLoggedIn(true); //DEV
+    // loadDevData(); //DEV
   }, []);
 
+  // const loadDevData = () => {
+  //   setCategories([{ "categoryId": 5, "categoryName": "CS2040S", "categoryColor": 0 }, { "categoryId": 6, "categoryName": "CVWO", "categoryColor": 1 }, { "categoryId": 7, "categoryName": "Orientation", "categoryColor": 2 }, { "categoryId": 8, "categoryName": "UTW1001C", "categoryColor": 3 }, { "categoryId": 9, "categoryName": "General", "categoryColor": 4 }]);
+  //   setTasks([{ "taskId": 6, "taskInfo": "watch lecture", "categoryId": 5 }, { "taskId": 7, "taskInfo": "do problem set", "categoryId": 5 }, { "taskId": 8, "taskInfo": "laundry", "categoryId": 9 }, { "taskId": 9, "taskInfo": "call meeting", "categoryId": 7 }, { "taskId": 10, "taskInfo": "prepare poster", "categoryId": 7 }, { "taskId": 11, "taskInfo": "plan games", "categoryId": 7 }, { "taskId": 12, "taskInfo": "readings", "categoryId": 8 }]);
+  // }
 
   const loadData = () => {
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
@@ -105,6 +104,11 @@ function App() {
     toast.success('New task created.');
     loadData();
   }
+
+  const onDeleteCategory = () => {
+    toast.success('Category deleted.');
+    loadData();
+  }
   
   const onNewCard = () => {
     setIsNewCardOpen(false);
@@ -152,8 +156,9 @@ function App() {
       )}
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll '>
+
         {categories.map(category => (
-          <Card setThisCategory={setThisCategory} setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks.filter(t => t.categoryId === category.categoryId)}></Card>
+          <Card callback={onDeleteCategory} setThisCategory={setThisCategory} setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks.filter(t => t.categoryId === category.categoryId)}></Card>
         ))}
       </div>)}
     </div>

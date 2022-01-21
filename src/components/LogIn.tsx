@@ -55,14 +55,14 @@ function LogIn(props: Props) {
     }
 
     return (
-        <div className="fixed z-10 inset-0 overflow-y-auto flex justify-center pt-40 bg-gray-400 bg-opacity-75 transition-opacity" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div className="fixed z-10 inset-0 overflow-y-auto flex justify-center pt-40 bg-gray-400 bg-opacity-75 transition-opacity">
             <div className="drop-shadow-md">
                 <div className="shadow overflow-hidden rounded-lg w-96 h-fit mx-auto my-auto">
-                    <form action="#" method="POST" onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <div className="flex justify-between">
                                 <h1 className="pb-3 text-xl font-notosans">Log in</h1>
-                                <button onClick={closeModal}>
+                                <button type="button" onClick={closeModal}>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mb-2" fill="none" viewBox="0 0 24 24" stroke="gray">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
