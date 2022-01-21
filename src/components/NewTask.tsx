@@ -15,9 +15,10 @@ function NewTask(props: Props) {
         props.setIsNewTaskOpen(false);
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        setErrorMessage('');
-        e.preventDefault();
 
+        e.currentTarget.preventDefault();
+        setErrorMessage('');
+        
         if (e.currentTarget.newname.value === '') {
             setErrorMessage("Please enter a name.")
             return
