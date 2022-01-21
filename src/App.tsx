@@ -127,18 +127,18 @@ function App() {
 
   const onNewTask = () => {
     setIsNewTaskOpen(false);
-    toast.success('New task created.');
+    toast.success('New task created');
     loadData();
   }
 
   const onDeleteCategory = () => {
-    toast.success('Card deleted.');
+    toast.success('Card deleted');
     loadData();
   }
 
   const onNewCard = () => {
     setIsNewCardOpen(false);
-    toast.success('New card created.');
+    toast.success('New card created');
     loadData();
   }
 
@@ -188,7 +188,7 @@ function App() {
         )}
 
         {(categories.length === 0 && loading === false) && (
-          <h1 className="text-gray-500 font-notosans text-2xl mx-auto mt-24 text-center">🤩 Nothing to do!<br></br><br></br>Click + to add a card.</h1>
+          <h1 className="text-gray-500 font-notosans text-2xl mx-auto mt-24 text-center">🤩 Nothing to do!<br></br><br></br>Click + to add a card</h1>
         )}
 
         {(categories.length === 0) || (categories.map(category => (
