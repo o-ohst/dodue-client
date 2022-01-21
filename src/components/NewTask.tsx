@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface Props {
@@ -10,15 +10,18 @@ interface Props {
 function NewTask(props: Props) {
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [disabled, setDisabled] = useState(false);
 
     const closeModal = () => {
         props.setIsNewTaskOpen(false);
     }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
+        setDisabled(true);
         e.preventDefault();
         setErrorMessage('');
-        
+
         if (e.currentTarget.newname.value === '') {
             setErrorMessage("Please enter a name.")
             return
@@ -40,10 +43,11 @@ function NewTask(props: Props) {
             if (res.status === 200) {
                 props.callback();
             }
-        }).catch(err => { 
-             console.log(err)
-        }
-         )
+        }).catch(err => {
+            console.log(err)
+        })
+        setDisabled(false);
+            
     }
 
     return (
@@ -67,7 +71,7 @@ function NewTask(props: Props) {
                             </div>
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
+                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
                                 Save
                             </button>
                         </div>
