@@ -32,7 +32,7 @@ function LogIn(props: Props) {
         }
 
         if (p.length < 4) {
-            setPasswordMessage('Password enter a valid password.')
+            setPasswordMessage('Please enter a valid password.')
             return
         }
 
@@ -52,10 +52,10 @@ function LogIn(props: Props) {
                     console.log('logged in');
                     props.callback();
                 } else {
-                    console.log("not ok")
-                    failed = true;
+                    console.log("not ok");
+                    setPasswordMessage("Invalid login details.");
                 }
-                setDisabled(false);
+                // setDisabled(false);
             }).catch(err => {
                 console.log(err);
                 setDisabled(false);
@@ -63,8 +63,6 @@ function LogIn(props: Props) {
         }
         
     }
-
-    useEffect(() => { if (failed) { setPasswordMessage('Invalid credentials.') } }, [failed]); 
 
     return (
         <div className="fixed z-10 inset-0 overflow-y-auto flex justify-center pt-40 bg-gray-400 bg-opacity-75 transition-opacity">
