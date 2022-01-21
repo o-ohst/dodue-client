@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState, useEffect} from 'react';
 import axios from 'axios';
 
 interface Props {
@@ -12,6 +12,7 @@ function LogIn(props: Props) {
     const [usernameMessage, setUsernameMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
     const [disabled, setDisabled] = useState(false);
+    let failed = false;
 
     const closeModal = () => {
         props.setIsLogInOpen(false);
@@ -52,7 +53,7 @@ function LogIn(props: Props) {
                     props.callback();
                 } else {
                     console.log("not ok")
-                    setPasswordMessage('Invalid credentials.'); 
+                    failed = true;
                 }
                 setDisabled(false);
             }).catch(err => {
@@ -62,6 +63,8 @@ function LogIn(props: Props) {
         }
         
     }
+
+    useEffect(() => { if (failed) { setPasswordMessage('Invalid credentials.') } }, []); 
 
     return (
         <div className="fixed z-10 inset-0 overflow-y-auto flex justify-center pt-40 bg-gray-400 bg-opacity-75 transition-opacity">
