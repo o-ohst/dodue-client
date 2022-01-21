@@ -25,7 +25,7 @@ function Card(props: Category) {
     }
 
     const deleteCategory = () => {
-        axios.put(process.env.REACT_APP_API_URL + 'categories/delete', {}, {
+        axios.delete(process.env.REACT_APP_API_URL + 'categories/delete', {
             withCredentials: true,
             headers: {
                 api_key: process.env.REACT_APP_API_KEY!,
