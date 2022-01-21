@@ -74,7 +74,7 @@ function App() {
         console.log('get categories success');
         const data: Category[] = [];
         if (res.data === null) {
-          setTasks([]);
+          setCategories([]);
         } else {
           res.data.map((c: any) => data.push({ categoryId: c.category_id, categoryName: c.name, categoryColor: c.color }))
           setCategories(data);
