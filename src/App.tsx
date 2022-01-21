@@ -49,6 +49,20 @@ function App() {
   // }
 
   const loadData = () => {
+    axios.delete(process.env.REACT_APP_API_URL + 'tasks/deletedone', {
+      withCredentials: true,
+      headers: {
+        api_key: process.env.REACT_APP_API_KEY!,
+      }
+    }).then(res => {
+      if (res.headers.error === undefined && res.status === 200) {
+        console.log('delete done success');
+      }
+    }).catch(err => {
+      console.log(err)
+    }
+    )
+
     axios.get(process.env.REACT_APP_API_URL + 'categories', {
       withCredentials: true,
       headers: {
@@ -109,7 +123,7 @@ function App() {
     toast.success('Category deleted.');
     loadData();
   }
-  
+
   const onNewCard = () => {
     setIsNewCardOpen(false);
     toast.success('New category created.');
@@ -152,7 +166,7 @@ function App() {
 
       {loggedIn || (<div className="flex justify-center w-full h-full bg-background">
         <SignUp callback={onSignUp}></SignUp>
-      </div>  
+      </div>
       )}
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll '>
