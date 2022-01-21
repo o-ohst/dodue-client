@@ -11,6 +11,7 @@ interface Props {
 function LogIn(props: Props) {
     const [usernameMessage, setUsernameMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
+    const [disabled, setDisabled] = useState(false);
 
     const closeModal = () => {
         props.setIsLogInOpen(false);
@@ -34,23 +35,29 @@ function LogIn(props: Props) {
             return
         }
 
-        axios.post(process.env.REACT_APP_API_URL + 'login', {}, {
-            withCredentials: true,
-            headers: {
-                api_key: process.env.REACT_APP_API_KEY!,
-                username: e.currentTarget.username.value,
-                password: e.currentTarget.password.value,
-            }
-        }).then(res => {
-            if (res.status === 200) {
-                console.log('logged in');
-                props.callback();
-            } else {
-                setPasswordMessage('Invalid credentials.');
-            }
+        if (disabled === false) {
+
+            setDisabled(true);
+
+            axios.post(process.env.REACT_APP_API_URL + 'login', {}, {
+                withCredentials: true,
+                headers: {
+                    api_key: process.env.REACT_APP_API_KEY!,
+                    username: e.currentTarget.username.value,
+                    password: e.currentTarget.password.value,
+                }
+            }).then(res => {
+                if (res.status === 200) {
+                    console.log('logged in');
+                    props.callback();
+                } else {
+                    setPasswordMessage('Invalid credentials.');
+                }
+                setDisabled(false);
             }).catch(err => {
                 console.log(err);
-            })
+            });
+        }
         
     }
 

@@ -8,28 +8,33 @@ interface Task {
 
 function ListItem(props:Task) {
     const [isChecked, setIsChecked] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     let audio = new Audio("/thock.m4a");
     const handleChange = () => {
         audio.play();
     
-        axios.put(process.env.REACT_APP_API_URL + 'tasks/done', {}, {
-            withCredentials: true,
-            headers: {
-                api_key: process.env.REACT_APP_API_KEY!,
-                task_id: props.taskId.toString(),
-                done: (!isChecked).toString(),
-            }
-        }).then(res => {
-            setIsChecked(!isChecked);
-            if (res.status === 200) {
-                console.log("done task success")
-            }
-        }).catch(err => {
-            console.log(err)
-        }
-        )
+        if (disabled === false) {
 
-        
+            setDisabled(true);
+
+            axios.put(process.env.REACT_APP_API_URL + 'tasks/done', {}, {
+                withCredentials: true,
+                headers: {
+                    api_key: process.env.REACT_APP_API_KEY!,
+                    task_id: props.taskId.toString(),
+                    done: (!isChecked).toString(),
+                }
+            }).then(res => {
+                setIsChecked(!isChecked);
+                if (res.status === 200) {
+                    console.log("done task success")
+                }
+                setDisabled(false);
+            }).catch(err => {
+                console.log(err)
+            }
+            )
+        }
         
     };
 

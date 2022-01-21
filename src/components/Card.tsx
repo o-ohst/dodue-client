@@ -1,6 +1,7 @@
 import Label from './Label';
 import List from './List';
 import axios from 'axios';
+import { useState } from 'react';
 
 interface Task {
     taskInfo: string,
@@ -19,26 +20,33 @@ interface Category {
 
 function Card(props: Category) {
 
+    const [disabled, setDisabled] = useState(false);
+
     const openNewTask = () => {
         props.setIsNewTaskOpen(true)
         props.setThisCategory(props.categoryId)
     }
 
     const deleteCategory = () => {
-        axios.delete(process.env.REACT_APP_API_URL + 'categories/delete', {
-            withCredentials: true,
-            headers: {
-                api_key: process.env.REACT_APP_API_KEY!,
-                category_id: props.categoryId.toString(),
+        if (disabled === false) {
+
+            setDisabled(true);
+            axios.delete(process.env.REACT_APP_API_URL + 'categories/delete', {
+                withCredentials: true,
+                headers: {
+                    api_key: process.env.REACT_APP_API_KEY!,
+                    category_id: props.categoryId.toString(),
+                }
+            }).then(res => {
+                if (res.status === 200) {
+                    props.callback();
+                }
+                setDisabled(false);
+            }).catch(err => {
+                console.log(err)
             }
-        }).then(res => {
-            if (res.status === 200) {
-                props.callback();
-            }
-        }).catch(err => {
-            console.log(err)
+            )
         }
-        )
     }
 
     return(

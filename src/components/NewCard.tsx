@@ -12,6 +12,8 @@ function NewCard(props: Props) {
     // eslint-disable-next-line
     const [selectedColor, setSelectedColor] = useState(-1);
     const [errorMessage, setErrorMessage] = useState('');
+    const [disabled, setDisabled] = useState(false);
+    
     const closeModal = () => {
         props.setIsNewCardOpen(false);
     }
@@ -35,21 +37,27 @@ function NewCard(props: Props) {
             return
         }
 
-        const data = {name: e.currentTarget.newname.value , color: selectedColor}
+        if (disabled === false) {
 
-        axios.post(process.env.REACT_APP_API_URL + 'categories/new', data, {
-            withCredentials: true,
-            headers: {
-                api_key: process.env.REACT_APP_API_KEY!,
+            setDisabled(true);
+
+            const data = { name: e.currentTarget.newname.value, color: selectedColor }
+
+            axios.post(process.env.REACT_APP_API_URL + 'categories/new', data, {
+                withCredentials: true,
+                headers: {
+                    api_key: process.env.REACT_APP_API_KEY!,
+                }
+            }).then(res => {
+                if (res.status === 200) {
+                    props.callback();
+                }
+                setDisabled(false);
+            }).catch(err => {
+                console.log(err)
             }
-        }).then(res => {
-            if (res.status === 200) {
-                props.callback();
-            }
-        }).catch(err => {
-            console.log(err)
+            )
         }
-        )
     }
 
     return (

@@ -9,6 +9,7 @@ function SignUp(props: Props) {
 
     const [usernameMessage, setUsernameMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
+    const [disabled, setDisabled] = useState(false);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         setUsernameMessage('');
@@ -28,35 +29,40 @@ function SignUp(props: Props) {
             return
         }
 
-        axios.post(process.env.REACT_APP_API_URL + 'signup', {}, {
-            headers: {
-                api_key: process.env.REACT_APP_API_KEY!,
-                username: u,
-                password: p,
-            }
-        }).then(res => {
-            if (res.status === 200) {
-                console.log('signed up');
-                props.callback();
-            } else {
-                switch (res.data.error) {
-                    case "ERROR: duplicate key value violates unique constraint \"users_username_key\" (SQLSTATE 23505)":
-                        setUsernameMessage('Username already taken.');
-                        break;
-                    case "no username provided":
-                        setUsernameMessage('Please enter username.')
-                        break;
-                    case "no password provided":
-                        setPasswordMessage('Please enter password.')
-                        break;
-                    default:
-                        console.log(res.data.error);
-                        break;
+        if (disabled === false) {
+            setDisabled(true);
+
+            axios.post(process.env.REACT_APP_API_URL + 'signup', {}, {
+                headers: {
+                    api_key: process.env.REACT_APP_API_KEY!,
+                    username: u,
+                    password: p,
                 }
-            }
-        }).catch(err => {
-            console.log(err);
-        })
+            }).then(res => {
+                if (res.status === 200) {
+                    console.log('signed up');
+                    props.callback();
+                } else {
+                    switch (res.data.error) {
+                        case "ERROR: duplicate key value violates unique constraint \"users_username_key\" (SQLSTATE 23505)":
+                            setUsernameMessage('Username already taken.');
+                            break;
+                        case "no username provided":
+                            setUsernameMessage('Please enter username.')
+                            break;
+                        case "no password provided":
+                            setPasswordMessage('Please enter password.')
+                            break;
+                        default:
+                            console.log(res.data.error);
+                            break;
+                    }
+                }
+                setDisabled(false);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     return (
