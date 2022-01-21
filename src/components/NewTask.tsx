@@ -18,7 +18,6 @@ function NewTask(props: Props) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
-        setDisabled(true);
         e.preventDefault();
         setErrorMessage('');
 
@@ -32,21 +31,28 @@ function NewTask(props: Props) {
             return
         }
 
-        const data = { name: e.currentTarget.newname.value, category_id: props.categoryId }
+        if (disabled === false) {
 
-        axios.post(process.env.REACT_APP_API_URL + 'tasks/new', data, {
-            withCredentials: true,
-            headers: {
-                api_key: process.env.REACT_APP_API_KEY!,
-            }
-        }).then(res => {
-            if (res.status === 200) {
-                props.callback();
-            }
-        }).catch(err => {
-            console.log(err)
-        })
-        setDisabled(false);
+            setDisabled(true);
+
+            const data = { name: e.currentTarget.newname.value, category_id: props.categoryId }
+
+            axios.post(process.env.REACT_APP_API_URL + 'tasks/new', data, {
+                withCredentials: true,
+                headers: {
+                    api_key: process.env.REACT_APP_API_KEY!,
+                }
+            }).then(res => {
+                if (res.status === 200) {
+                    props.callback();
+                }
+                setDisabled(false);
+            }).catch(err => {
+                console.log(err)
+            })
+            
+        }
+        
             
     }
 
