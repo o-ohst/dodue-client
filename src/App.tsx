@@ -132,13 +132,13 @@ function App() {
   }
 
   const onDeleteCategory = () => {
-    toast.success('Category deleted.');
+    toast.success('Card deleted.');
     loadData();
   }
 
   const onNewCard = () => {
     setIsNewCardOpen(false);
-    toast.success('New category created.');
+    toast.success('New card created.');
     loadData();
   }
 
