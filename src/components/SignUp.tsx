@@ -78,12 +78,12 @@ function SignUp(props: Props) {
                             </div>
                             <div className="col-span-6 sm:col-span-3 mt-3">
                                 <label className="block text-md font-notosans text-gray-700">Username</label>
-                                <input autoFocus type="text" name='username' id="username" autoComplete="username" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
+                                <input autoFocus type="text" name='username' id="username" autoComplete="username" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm text-md border-gray-300 rounded-md" />
                                 <label className="block text-sm font-notosans pt-2 text-red-400">{usernameMessage}</label>
                             </div>
                             <div className="col-span-6 sm:col-span-3 mt-3">
                                 <label className="block text-md font-notosans text-gray-700">Password</label>
-                                <input type="password" name='password' id="password" autoComplete="password" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm sm:text-md border-gray-300 rounded-md" />
+                                <input type="password" name='password' id="password" autoComplete="password" className="mt-1 focus:ring-secondary focus:border-secondary block w-full shadow-sm text-md border-gray-300 rounded-md" />
                                 <label className="block text-sm font-notosans pt-2 text-red-400">{passwordMessage}</label>
                             </div>
 

@@ -90,7 +90,7 @@ function LogIn(props: Props) {
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                             <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover disabled:bg-gray-300 focus:outline-none">
-                                {disabled ? "Logging In..." : "Log In"}
+                                {disabled ? "Logging in..." : "Log in"}
                             </button>
                         </div>
                     </form>
