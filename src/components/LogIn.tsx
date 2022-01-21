@@ -51,7 +51,8 @@ function LogIn(props: Props) {
                     console.log('logged in');
                     props.callback();
                 } else {
-                    setPasswordMessage('Invalid credentials.');
+                    console.log("not ok")
+                    setPasswordMessage('Invalid credentials.'); 
                 }
                 setDisabled(false);
             }).catch(err => {

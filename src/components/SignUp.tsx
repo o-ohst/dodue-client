@@ -42,7 +42,7 @@ function SignUp(props: Props) {
                 if (res.status === 200) {
                     console.log('signed up');
                     props.callback();
-                } else {
+                } else {    
                     switch (res.data.error) {
                         case "ERROR: duplicate key value violates unique constraint \"users_username_key\" (SQLSTATE 23505)":
                             setUsernameMessage('Username already taken.');
