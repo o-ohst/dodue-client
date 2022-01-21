@@ -132,8 +132,10 @@ function App() {
   }
 
   const onDeleteCategory = () => {
+    setIsNewCardOpen(false);
     toast.success('Card deleted');
     loadData();
+
   }
 
   const onNewCard = () => {
@@ -188,7 +190,7 @@ function App() {
         )}
 
         {(categories.length === 0 && loading === false) && (
-          <h1 className="text-gray-500 font-notosans text-2xl mx-auto mt-24 text-center">🤩 Nothing to do!<br></br><br></br>Click + to add a card</h1>
+          <h1 className="text-gray-500 font-notosans text-2xl mx-auto mt-24 text-center">🤩 Nothing to do!<br></br><br></br>Click + to add a card.</h1>
         )}
 
         {(categories.length === 0) || (categories.map(category => (
