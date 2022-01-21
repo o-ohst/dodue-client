@@ -54,10 +54,13 @@ function App() {
       withCredentials: true,
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-      }
+      },
+      validateStatus: (status) => (status === 200 || status === 400)
     }).then(res => {
       if (res.status === 200) {
         console.log('delete done success');
+      } else {
+        console.log(res.data.error);
       }
     }).catch(err => {
       console.log(err)
@@ -68,7 +71,8 @@ function App() {
       withCredentials: true,
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-      }
+      },
+      validateStatus: (status) => (status === 200 || status === 400)
     }).then(res => {
       if (res.status === 200) {
         console.log('get categories success');
@@ -80,7 +84,7 @@ function App() {
           setCategories(data);
         }
       } else {
-        console.log(res.data);
+        console.log(res.data.error);
       }
     }).catch(err => {
       console.log(err);
@@ -90,7 +94,8 @@ function App() {
       withCredentials: true,
       headers: {
         api_key: process.env.REACT_APP_API_KEY!,
-      }
+      },
+      validateStatus: (status) => (status === 200 || status === 400)
     }).then(res => {
       if (res.status === 200) {
         console.log('get tasks success');

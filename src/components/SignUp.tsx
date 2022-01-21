@@ -37,7 +37,8 @@ function SignUp(props: Props) {
                     api_key: process.env.REACT_APP_API_KEY!,
                     username: u,
                     password: p,
-                }
+                },
+                validateStatus: (status) => (status === 200 || status === 400)
             }).then(res => {
                 if (res.status === 200) {
                     console.log('signed up');

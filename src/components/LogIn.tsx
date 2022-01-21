@@ -45,15 +45,17 @@ function LogIn(props: Props) {
                     api_key: process.env.REACT_APP_API_KEY!,
                     username: e.currentTarget.username.value,
                     password: e.currentTarget.password.value,
-                }
+                },
+                validateStatus: (status) => (status === 200 || status === 400 )
             }).then(res => {
                 console.log(res.status)
                 if (res.status === 200) {
                     console.log('logged in');
                     props.callback();
-                } 
-                console.log("not ok");
-                setPasswordMessage("Invalid login details.");
+                } else {
+                    console.log("not ok");
+                    setPasswordMessage("Invalid login details.");
+                }
                 setDisabled(false);
             }).catch(err => {
                 console.log(err);

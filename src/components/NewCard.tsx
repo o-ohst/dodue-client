@@ -47,10 +47,13 @@ function NewCard(props: Props) {
                 withCredentials: true,
                 headers: {
                     api_key: process.env.REACT_APP_API_KEY!,
-                }
+                },
+                validateStatus: (status) => (status === 200 || status === 400)
             }).then(res => {
                 if (res.status === 200) {
                     props.callback();
+                } else {
+                    setErrorMessage(res.data.error);
                 }
                 setDisabled(false);
             }).catch(err => {

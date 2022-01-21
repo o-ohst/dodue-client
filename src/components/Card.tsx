@@ -36,10 +36,13 @@ function Card(props: Category) {
                 headers: {
                     api_key: process.env.REACT_APP_API_KEY!,
                     category_id: props.categoryId.toString(),
-                }
+                },
+                validateStatus: (status) => (status === 200 || status === 400)
             }).then(res => {
                 if (res.status === 200) {
                     props.callback();
+                } else {
+                    console.log(res.data.error);
                 }
                 setDisabled(false);
             }).catch(err => {

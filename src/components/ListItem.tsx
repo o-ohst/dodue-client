@@ -23,11 +23,14 @@ function ListItem(props:Task) {
                     api_key: process.env.REACT_APP_API_KEY!,
                     task_id: props.taskId.toString(),
                     done: (!isChecked).toString(),
-                }
+                },
+                validateStatus: (status) => (status === 200 || status === 400)
             }).then(res => {
                 if (res.status === 200) {
                     console.log("done task success")
                     setIsChecked(!isChecked);
+                } else {
+                    console.log(res.data.error);
                 }
                 setDisabled(false);
             }).catch(err => {
