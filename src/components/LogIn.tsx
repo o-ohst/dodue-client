@@ -47,14 +47,14 @@ function LogIn(props: Props) {
                     password: e.currentTarget.password.value,
                 }
             }).then(res => {
+                console.log(res.status)
                 if (res.status === 200) {
                     console.log('logged in');
                     props.callback();
-                } else {
-                    console.log("not ok");
-                    setPasswordMessage("Invalid login details.");
-                }
-                // setDisabled(false);
+                } 
+                console.log("not ok");
+                setPasswordMessage("Invalid login details.");
+                setDisabled(false);
             }).catch(err => {
                 console.log(err);
                 setDisabled(false);
