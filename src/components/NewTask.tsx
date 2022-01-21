@@ -16,7 +16,7 @@ function NewTask(props: Props) {
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
-        e.currentTarget.preventDefault();
+        e.preventDefault();
         setErrorMessage('');
         
         if (e.currentTarget.newname.value === '') {
