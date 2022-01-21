@@ -41,6 +41,7 @@ function Card(props: Category) {
                 if (res.status === 200) {
                     props.callback();
                 }
+                setDisabled(false);
             }).catch(err => {
                 console.log(err);
                 setDisabled(false);
@@ -60,7 +61,7 @@ function Card(props: Category) {
                 </button>
             </div>
             {(props.tasks.length === 0) && (
-                <button onClick={deleteCategory} className='mt-3 mr-2 text-lg underline text-gray-400'>Delete card</button>
+                <button onClick={deleteCategory} disabled={disabled} className='mt-3 mr-2 text-lg underline text-gray-400 disabled:no-underline disabled:italic'>{disabled ? "Deleting..." : "Delete card"}</button>
             )}
             <List tasks={props.tasks}/>
         </div>

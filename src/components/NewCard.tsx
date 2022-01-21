@@ -52,6 +52,7 @@ function NewCard(props: Props) {
                 if (res.status === 200) {
                     props.callback();
                 }
+                setDisabled(false);
             }).catch(err => {
                 console.log(err)
                 setDisabled(false);
@@ -89,8 +90,8 @@ function NewCard(props: Props) {
                             <label className="block text-sm font-notosans pt-2 text-red-400">{errorMessage}</label>
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
-                                Save
+                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover disabled:bg-gray-300 focus:outline-none">
+                                {disabled ? "Saving..." : "Save"}
                             </button>
                         </div>
                     </form>

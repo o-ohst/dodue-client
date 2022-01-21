@@ -58,6 +58,7 @@ function SignUp(props: Props) {
                             break;
                     }
                 }
+                setDisabled(false);
             }).catch(err => {
                 console.log(err);
                 setDisabled(false);
@@ -88,8 +89,8 @@ function SignUp(props: Props) {
 
                         </div>
                         <div className="px-4 py-3 bg-white text-center sm:px-6">
-                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
-                                Sign Up
+                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary disabled:bg-gray-300 hover:bg-secondaryHover focus:outline-none">
+                                {disabled ? "Signing up..." : "Sign up"}
                             </button>
                         </div>
                     </form>

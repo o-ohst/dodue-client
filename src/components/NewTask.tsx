@@ -46,6 +46,7 @@ function NewTask(props: Props) {
                 if (res.status === 200) {
                     props.callback();
                 }
+                setDisabled(false);
             }).catch(err => {
                 console.log(err)
                 setDisabled(false);
@@ -77,8 +78,8 @@ function NewTask(props: Props) {
                             </div>
                         </div>
                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary hover:bg-secondaryHover focus:outline-none">
-                                Save
+                            <button type="submit" disabled={disabled} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-secondary disabled:bg-gray-300 hover:bg-secondaryHover focus:outline-none">
+                                {disabled ? "Saving..." : "Save"}
                             </button>
                         </div>
                     </form>
