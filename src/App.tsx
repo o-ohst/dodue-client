@@ -26,6 +26,7 @@ function App() {
   const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
   const [isLogInOpen, setIsLogInOpen] = useState(false);
   const [thisCategory, setThisCategory] = useState(-1);
+  const [loading, setLoading] = useState(true);
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -104,8 +105,10 @@ function App() {
       } else {
         console.log(res.data.error);
       }
+      setLoading(false);
     }).catch(err => {
       console.log(err);
+      setLoading(false);
     })
   }
 
@@ -179,8 +182,12 @@ function App() {
       )}
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll '>
+        
+        {(loading === true) && (
+          <h1 className="text-gray-500 font-notosans text-2xl mx-auto mt-24 text-center">😣 Loading...</h1>
+        )}
 
-        {(categories.length === 0) && (
+        {(categories.length === 0 && loading === false) && (
           <h1 className="text-gray-500 font-notosans text-2xl mx-auto mt-24 text-center">🤩 Nothing to do!<br></br><br></br>Click + to add a card.</h1>
         )}
 
