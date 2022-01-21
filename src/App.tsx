@@ -55,7 +55,7 @@ function App() {
         api_key: process.env.REACT_APP_API_KEY!,
       }
     }).then(res => {
-      if (res.headers.error === undefined && res.status === 200) {
+      if (res.data.error === undefined && res.status === 200) {
         console.log('delete done success');
       }
     }).catch(err => {
