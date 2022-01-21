@@ -69,7 +69,7 @@ function App() {
         api_key: process.env.REACT_APP_API_KEY!,
       }
     }).then(res => {
-      if (res.data === undefined && res.status === 200) {
+      if (res.data.error === undefined && res.status === 200) {
         console.log('get categories success');
         const data: Category[] = [];
         res.data.map((c: any) => data.push({ categoryId: c.category_id, categoryName: c.name, categoryColor: c.color }))
