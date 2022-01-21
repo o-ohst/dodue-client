@@ -42,7 +42,7 @@ function LogIn(props: Props) {
                 password: e.currentTarget.password.value,
             }
         }).then(res => {
-            if (res.data.error === undefined && res.status === 200) {
+            if (res.status === 200) {
                 console.log('logged in');
                 props.callback();
             } else {

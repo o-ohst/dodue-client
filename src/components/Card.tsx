@@ -32,7 +32,7 @@ function Card(props: Category) {
                 category_id: props.categoryId.toString(),
             }
         }).then(res => {
-            if (res.data.error === undefined && res.status === 200) {
+            if (res.status === 200) {
                 props.callback();
             }
         }).catch(err => {

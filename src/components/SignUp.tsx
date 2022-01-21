@@ -21,7 +21,7 @@ function SignUp(props: Props) {
         if (u.length < 5) {
             setUsernameMessage('Username must be at least 4 characters.')
             return
-        } 
+        }
 
         if (p.length < 8) {
             setPasswordMessage('Password must be at least 8 characters')
@@ -35,7 +35,7 @@ function SignUp(props: Props) {
                 password: p,
             }
         }).then(res => {
-            if (res.data.error === undefined && res.status === 200) {
+            if (res.status === 200) {
                 console.log('signed up');
                 props.callback();
             } else {
@@ -64,7 +64,7 @@ function SignUp(props: Props) {
 
             <div className="">
                 <div className="overflow-hidden rounded-lg w-96 h-fit mx-auto my-auto">
-                    <form  onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div className="px-4 py-5 bg-white sm:p-6">
                             <div className="flex justify-center">
                                 <h1 className="pb-3 text-xl font-notosans">Sign Up</h1>

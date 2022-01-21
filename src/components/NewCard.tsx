@@ -43,7 +43,7 @@ function NewCard(props: Props) {
                 api_key: process.env.REACT_APP_API_KEY!,
             }
         }).then(res => {
-            if (res.headers.error === undefined && res.status === 200) {
+            if (res.status === 200) {
                 props.callback();
             }
         }).catch(err => {

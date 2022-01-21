@@ -21,7 +21,7 @@ function ListItem(props:Task) {
             }
         }).then(res => {
             setIsChecked(!isChecked);
-            if (res.data.error === undefined && res.status === 200) {
+            if (res.status === 200) {
                 console.log("done task success")
             }
         }).catch(err => {

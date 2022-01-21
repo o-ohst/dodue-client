@@ -55,7 +55,7 @@ function App() {
         api_key: process.env.REACT_APP_API_KEY!,
       }
     }).then(res => {
-      if (res.data.error === undefined && res.status === 200) {
+      if (res.status === 200) {
         console.log('delete done success');
       }
     }).catch(err => {
@@ -69,7 +69,7 @@ function App() {
         api_key: process.env.REACT_APP_API_KEY!,
       }
     }).then(res => {
-      if (res.data.error === undefined && res.status === 200) {
+      if (res.status === 200) {
         console.log('get categories success');
         const data: Category[] = [];
         res.data.map((c: any) => data.push({ categoryId: c.category_id, categoryName: c.name, categoryColor: c.color }))
@@ -87,7 +87,7 @@ function App() {
         api_key: process.env.REACT_APP_API_KEY!,
       }
     }).then(res => {
-      if (res.data.error === undefined && res.status === 200) {
+      if (res.status === 200) {
         console.log('get tasks success');
         const data: Task[] = [];
         res.data.map((t: any) => data.push({ taskId: t.task_id, taskInfo: t.name, categoryId: t.category_id }))
