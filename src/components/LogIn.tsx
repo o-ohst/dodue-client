@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState} from 'react';
 import axios from 'axios';
 
 interface Props {
@@ -12,7 +12,6 @@ function LogIn(props: Props) {
     const [usernameMessage, setUsernameMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
     const [disabled, setDisabled] = useState(false);
-    let failed = false;
 
     const closeModal = () => {
         props.setIsLogInOpen(false);
