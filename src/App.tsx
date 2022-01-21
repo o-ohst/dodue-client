@@ -6,6 +6,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import { isNull } from "util";
 
 type Category = {
   categoryName: string,
@@ -72,8 +73,12 @@ function App() {
       if (res.status === 200) {
         console.log('get categories success');
         const data: Category[] = [];
-        res.data.map((c: any) => data.push({ categoryId: c.category_id, categoryName: c.name, categoryColor: c.color }))
-        setCategories(data);
+        if (res.data === null) {
+          setTasks([]);
+        } else {
+          res.data.map((c: any) => data.push({ categoryId: c.category_id, categoryName: c.name, categoryColor: c.color }))
+          setCategories(data);
+        }
       } else {
         console.log(res.data);
       }
@@ -90,8 +95,13 @@ function App() {
       if (res.status === 200) {
         console.log('get tasks success');
         const data: Task[] = [];
-        res.data.map((t: any) => data.push({ taskId: t.task_id, taskInfo: t.name, categoryId: t.category_id }))
-        setTasks(data);
+        if (res.data === null) {
+          setTasks([]);
+        } else {
+          res.data.map((t: any) => data.push({ taskId: t.task_id, taskInfo: t.name, categoryId: t.category_id }))
+          setTasks(data);
+        }
+        
       } else {
         console.log(res.data.error);
       }
@@ -171,9 +181,9 @@ function App() {
 
       {loggedIn && (<div className='bg-background w-full h-full px-12 py-24 flex overflow-x-scroll '>
 
-        {categories.map(category => (
+        {(categories.length === 0) || (categories.map(category => (
           <Card callback={onDeleteCategory} setThisCategory={setThisCategory} setIsNewTaskOpen={setIsNewTaskOpen} categoryName={category.categoryName} categoryId={category.categoryId} categoryColor={category.categoryColor} tasks={tasks.filter(t => t.categoryId === category.categoryId)}></Card>
-        ))}
+        )))}
       </div>)}
     </div>
   );
