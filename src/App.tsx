@@ -6,7 +6,6 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { isNull } from "util";
 
 type Category = {
   categoryName: string,
