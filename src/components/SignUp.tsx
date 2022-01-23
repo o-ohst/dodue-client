@@ -25,7 +25,7 @@ function SignUp(props: Props) {
         }
 
         if (p.length < 8) {
-            setPasswordMessage('Password must be at least 8 characters')
+            setPasswordMessage('Password must be at least 8 characters.')
             return
         }
 
