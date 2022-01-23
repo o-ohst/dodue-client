@@ -4,7 +4,7 @@ Dodue simplifies your task management by providing a clean, minimalistic experie
 
 - 🧘clean, minimalistic UI
 - ✨extremely simple to use
-- 🤹organise different projects easily using cards
+- 🤹organise different projects easily
 
 *Note: The app requires cross origin cookies which do not work on Safari unless the setting "allow cross site tracking" is enabled.*
 
