@@ -20,7 +20,7 @@ function SignUp(props: Props) {
         const p = e.currentTarget.password.value;
 
         if (u.length < 5) {
-            setUsernameMessage('Username must be at least 4 characters.')
+            setUsernameMessage('Username must be at least 5 characters.')
             return
         }
 

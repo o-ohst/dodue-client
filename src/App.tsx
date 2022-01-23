@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('loggedIn') === 'true') { //PROD
       setLoggedIn(true);
-      loadData();
+      loadData(); 
     }
     // setLoggedIn(true); //DEV
     // loadDevData(); //DEV
