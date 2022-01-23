@@ -1,4 +1,4 @@
-# 🏷️Dodue: a minimalistic to-do list app.
+# 🏷️Dodue: a minimalistic to-do list app
 
 Dodue simplifies your task management by providing a clean, minimalistic experience, just like using post-its. Your tasks are organised by cards, providing a clear view of all your different projects, which is especially helpful for busy students with many things to do (like me!). Dodue brings simplicity and clarity back to modern multitaskers, like how task management should be.
 
@@ -12,7 +12,7 @@ The app is hosted at: [https://dodue.netlify.app/](https://dodue.netlify.app/)
 
 <br>
 
-## CVWO Submission Details
+## CVWO Submission Details:
 - Name: Hao Sitong
 - Student Number: A0238908R
 
@@ -20,11 +20,11 @@ The app is hosted at: [https://dodue.netlify.app/](https://dodue.netlify.app/)
 
 ## Technicals
 Stack & libraries used:
-#### Frontend (hosted on Netlify)
+#### [Frontend](https://github.com/o-ohst/dodue-client) (hosted on Netlify)
 - React.js (Typescript)
 - axios
 
-#### Backend (hosted on Heroku)
+#### [Backend](https://github.com/o-ohst/dodue-server) (hosted on Heroku)
 - Go
 - pgx (database)
 - PostgreSQL
