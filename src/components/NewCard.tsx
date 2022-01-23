@@ -9,7 +9,6 @@ interface Props {
 
 function NewCard(props: Props) {
 
-    // eslint-disable-next-line
     const [selectedColor, setSelectedColor] = useState(-1);
     const [errorMessage, setErrorMessage] = useState('');
     const [disabled, setDisabled] = useState(false);

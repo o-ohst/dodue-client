@@ -31,6 +31,7 @@ function Card(props: Category) {
         if (disabled === false) {
 
             setDisabled(true);
+
             axios.delete(process.env.REACT_APP_API_URL + 'categories/delete', {
                 withCredentials: true,
                 headers: {

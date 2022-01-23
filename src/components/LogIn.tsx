@@ -4,8 +4,6 @@ import axios from 'axios';
 interface Props {
     callback: Function,
     setIsLogInOpen: Function,
-    // setUserId: Function,
-    // setToken: Function,
 }
 
 function LogIn(props: Props) {

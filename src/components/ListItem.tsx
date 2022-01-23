@@ -10,6 +10,7 @@ function ListItem(props:Task) {
     const [isChecked, setIsChecked] = useState(false);
     const [disabled, setDisabled] = useState(false);
     let audio = new Audio("/thock.m4a");
+
     const handleChange = () => {
         audio.play();
     
@@ -17,6 +18,7 @@ function ListItem(props:Task) {
 
             setDisabled(true);
 
+            //update task ("done" column) in database
             axios.put(process.env.REACT_APP_API_URL + 'tasks/done', {}, {
                 withCredentials: true,
                 headers: {

@@ -10,7 +10,7 @@ interface Props {
 function NewTask(props: Props) {
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [disabled, setDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(false); //button disabled to prevent duplicate submissions
 
     const closeModal = () => {
         props.setIsNewTaskOpen(false);
